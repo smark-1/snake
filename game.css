@@ -1,0 +1,316 @@
+body{
+    margin-right:auto;
+    margin-left:auto;
+    margin-top:0px;
+    margin-bottom:0px;
+    width:510px;
+    background-color:black;
+    color:white;
+    
+    
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Press Start 2P';
+    padding:0.1em;
+}
+
+.panel{
+    position:fixed;
+    width: 300px;
+    height:90vh;
+    text-align: center;
+    border-radius:10px;
+    z-index:-1;
+    overflow:scroll;
+}
+
+.panel > img, .panel > a > img, .panel > div{
+    width:300px;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:25px;
+    box-sizing:border-box;
+    background-color:#21201f;
+    /*background-color:#191919;*/
+}
+
+.popup{
+    background-color:#21201f;
+    position:fixed;
+    width: 510px;
+    padding:20px;
+    height:400px;
+    text-align: center;
+    border-radius:10px;
+    z-index:5;
+    overflow:scroll;
+    top: 0;
+    box-sizing:border-box;
+    opacity:0;
+    transition: all 300ms ease-in-out;
+    pointer-events: none;
+}
+
+.popup.active{
+    opacity:1;
+    pointer-events: auto;
+    top: 50;
+}
+#leaderboard{
+    top: 110;
+    left: 30;
+    width:300px;
+    padding:20px;
+    background-color:#21201f;
+    height:200px;
+}
+
+#messages{
+    top: 370;
+    left: 30;
+    width:300px;
+    padding:20px;
+    background-color:#21201f;
+    height:200px;
+}
+
+#advert{
+    top: 110;
+    right: 30;
+}
+
+li{
+    line-height: 2;  
+    text-transform: capitalize;
+}
+
+h1,h2 {
+    text-align: center;
+}
+
+.flex-container{
+    display:flex;    
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.game-row , .skins-row{
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+.skins-row > .snake:nth-child(2) {
+  animation-delay: 300ms;
+}
+
+.skins-row > .snake:nth-child(3) {
+  animation-delay: 450ms;
+}
+.skins-row > .snake:nth-child(4) {
+  animation-delay: 600ms;
+}
+.skins-row > .snake:nth-child(5) {
+  animation-delay: 750ms;
+}
+.skins-row > .snake:nth-child(6) {
+  animation-delay: 900ms;
+}
+.skins-row > .snake:nth-child(7) {
+  animation-delay: 1050ms;
+}
+.skins-row > .snake:nth-child(8) {
+  animation-delay: 1200ms;
+}
+.skins-row > .snake:nth-child(9) {
+  animation-delay: 1350ms;
+}
+
+.box{
+    
+    background-color:black;
+    width:17px;
+    height:17px;
+    margin-left:0px;
+    margin-right:0px;
+    border-color:green;
+    border-width:5px;
+    border-style: none;
+    box-sizing:border-box;
+    display:inline-block;
+    
+    
+}
+
+.button{
+    background-color:#21201f;
+    padding:3px 15px;
+    border-radius:5px;
+    transition: all 200ms ease-in-out;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color:#383838;
+    border-radius:15px;
+    
+}
+
+.box:first-child, .box:last-child, .game-row.border > .box{
+    background-color:#383838;
+    border-style: none;
+
+}
+
+.box.food{
+    width:0px;
+    height:0px;
+    margin:8.5;
+    background-color:blue;
+    border-radius:50%;
+    animation-name: food_color, colors;
+    animation-duration: 200ms, 5000ms;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    transition: all 20ms linear;
+    animation-delay: 50ms;
+}
+
+
+
+@keyframes food_color {
+  0%   {width:13px;height:13px;margin:2;}
+  100% {width:17px;height:17px;margin:0;}
+}
+
+@keyframes colors {
+  0%   {background-color: white;}
+  25%   {background-color:blue;}
+  50%   {background-color:pink;}
+  75%   {background-color:brown;}
+  100% {background-color: green;}
+}
+
+.box.snake{
+    border-color:pink;
+    background-color:red;
+    border-radius:0px;
+    border-width:5px;
+    border-style:none;
+    /*background-image: url("https://docs.google.com/drawings/d/e/2PACX-1vR6hbUxXIR0QUQfBSWaPRC6PbqqynxlrAzuZ_TCkD-fAVN4wiXZHACDT2Lqvv4UsAqIjjCiuORrLyxt/pub?w=480&h=480");*/
+    background-size: cover;
+    
+    animation-duration: 1000ms;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-delay: 150ms;
+}
+
+
+.box.snake.skin1{
+    animation-name: snake_skin1;
+}
+
+@keyframes snake_skin1 {
+  0%    {background-color:green;border-style:none;}
+  50%   {background-color: yellow;}
+  100%   {background-color: green;}
+  
+}
+
+.box.snake.skin2{
+    animation-name: snake_skin2;
+}
+
+@keyframes snake_skin2{
+    0%    {background-color:pink;border-style:none;}
+    50%   {background-color: red;}
+    100%   {background-color: orange;}
+}
+
+.box.snake.skin3{
+    animation-name: snake_skin3;
+}
+
+@keyframes snake_skin3{
+    0%    {background-color:black;border-style:none;}
+    25%   {background-color: grey;}
+    50%   {background-color: white;}
+    75%   {background-color: grey;}
+    100%   {background-color: black;}
+}
+
+
+.box.snake.skin4{
+    animation-name: snake_skin4;
+}
+
+@keyframes snake_skin4{
+    0%    {background-color:orange;border-style:none;}
+    50%   {background-color: green;}
+    100%   {background-color: pink;}
+}
+
+
+.box.snake.skin5{
+    animation-name: snake_skin5;
+}
+
+@keyframes snake_skin5{
+    0%    {background-color:yellow;border-style:none;}
+    30%   {background-color: orange;}
+    50%   {background-color: orange;}
+    70%   {background-color: orange;}
+    100%   {background-color: red;}
+}
+
+
+.box.snake.skin6{
+    animation-name: snake_skin6;
+}
+
+@keyframes snake_skin6{
+    0%    {background-color:red;border-style:none;}
+    50%   {background-color: purple;}
+    100%   {background-color: brown;}
+}
+
+.box.snake.skin7{
+    animation-name: snake_skin7;
+}
+
+@keyframes snake_skin7{
+    0%    {background-color:blue;border-style:none;}
+    100%   {background-color: purple;}
+}
+
+.box.snake.skin8{
+    animation-name: snake_skin8;
+}
+
+@keyframes snake_skin8{
+    0%    {background-color:blue;border-style:none;}
+    100%   {background-color: blue;}
+}
+
+.box.snake.skin9{
+    animation-name: snake_skin9;
+}
+
+@keyframes snake_skin9{
+    0%    {background-color:green;border-style:none;}
+    100%   {background-color: green;}
+}
+
+.box.snake.skin10{
+    animation-name: snake_skin10;
+}
+
+@keyframes snake_skin10{
+    0%    {background-color:white;border-style:none;}
+    100%   {background-color: white;}
+}
