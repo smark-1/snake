@@ -1,5 +1,5 @@
 # Snake
-my first javascript games
+my first javascript game
 
 a simple game of snake with skins, leaderboard and high scores
 
