@@ -330,7 +330,7 @@ function load_messages(){
             document.getElementById("messages").innerHTML=this.responseText;
         }
     };
-    xhttp2.open("GET", "/messages.html", true);
+    xhttp2.open("GET", "./messages.html", true);
     xhttp2.send();
 }
 
