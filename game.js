@@ -6,7 +6,7 @@ var snake_skin="";
 var game_direction=snake_direction;
 
 var food=[];
-var start_speed=150;
+var start_speed=100;
 var speed=start_speed;
 var paused=false;
 var game_over=false;
@@ -19,80 +19,11 @@ function change_skin(skin){
 
 function do_refresh(){
     localStorage.setItem("leader_board_time",Date.now());
-    
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var obj = JSON.parse(this.responseText);
-            
-            var string;
-            
-            
-            string=obj[0].email+" - "+obj[0].high;
-            localStorage.setItem("first_place",string);
-            
-            string=obj[1].email+" - "+obj[1].high;
-            localStorage.setItem("second_place",string);
-            
-            string=obj[2].email+" - "+obj[2].high;
-            localStorage.setItem("third_place",string);
-            
-            string=obj[3].email+" - "+obj[3].high;
-            localStorage.setItem("fourth_place",string);
-            
-            string=obj[4].email+" - "+obj[4].high;
-            localStorage.setItem("fifth_place",string);
-            
-            
-            
-            string=obj[5].email+" - "+obj[5].high;
-            localStorage.setItem("sixth_place",string);
-            
-            string=obj[6].email+" - "+obj[6].high;
-            localStorage.setItem("seventh_place",string);
-            
-            string=obj[7].email+" - "+obj[7].high;
-            localStorage.setItem("eighth_place",string);
-            
-            string=obj[8].email+" - "+obj[8].high;
-            localStorage.setItem("ninth_place",string);
-            
-            string=obj[9].email+" - "+obj[9].high;
-            localStorage.setItem("tenth_place",string);
-            
-            
-            
-            string=obj[10].email+" - "+obj[10].high;
-            localStorage.setItem("eleventh_place",string);
-            
-            string=obj[11].email+" - "+obj[11].high;
-            localStorage.setItem("twelth_place",string);
-            
-            string=obj[12].email+" - "+obj[12].high;
-            localStorage.setItem("thirteenth_place",string);
-            
-            string=obj[13].email+" - "+obj[13].high;
-            localStorage.setItem("fourteenth_place",string);
-            
-            string=obj[14].email+" - "+obj[14].high;
-            localStorage.setItem("fifteenth_place",string);
-            
-            
-            
-            string=obj[15].email+" - "+obj[15].high;
-            localStorage.setItem("sixteenth_place",string);
-            
-            string=obj[16].email+" - "+obj[16].high;
-            localStorage.setItem("seventeenth_place",string);
-            
-            string=obj[17].email+" - "+obj[17].high;
-            localStorage.setItem("eighteenth_place",string);
-            
-            string=obj[18].email+" - "+obj[18].high;
-            localStorage.setItem("ninteenth_place",string);
-            
-            string=obj[19].email+" - "+obj[19].high;
-            localStorage.setItem("twentyith_place",string);
+        if (this.readyState === 4 && this.status === 200) {
+            localStorage.setItem("leaderboard_scores",this.responseText)
+            leader_board_refresh();
         }
     };
     xhttp.open("GET", `https://sheetdb.io/api/v1/${SHEETDB_API_KEY}?sheet=${SHEETDB_LEADERBOARD_SHEET}&sort_by=high&sort_order=desc`, true);
@@ -101,55 +32,31 @@ function do_refresh(){
 
 function leader_board_refresh(){
     if(localStorage.getItem("leader_board_time")){
-        
-        var current_leader_board_time=parseInt(localStorage.getItem("leader_board_time"));
-        var current_time=Date.now();
-        
-        var next_refresh_time=parseInt(current_leader_board_time)+SECONDS_TILL_NEXT_REFRESH_SCORE;
-        
+
+        const current_leader_board_time = parseInt(localStorage.getItem("leader_board_time"));
+        const current_time = Date.now();
+
+        const next_refresh_time = parseInt(current_leader_board_time) + SECONDS_TILL_NEXT_REFRESH_SCORE;
+
         if(next_refresh_time<current_time){
             //time to refresh
             do_refresh();
-            
-            
         }
         else{
-            var d = new Date(next_refresh_time);
-            // alert("refreshing in "+d);
-            document.getElementById('refresh_time').innerHTML=d.toTimeString();;
-            }
+            const d = new Date(next_refresh_time);
+            document.getElementById('refresh_time').innerHTML=d.toTimeString();
+        }
         
     }else{
         do_refresh();
     }
     
     var leader_board=document.getElementById("leader_board_text");
-    
-    leader_board.innerHTML='<li>'+localStorage.getItem("first_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("second_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("third_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("fourth_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("fifth_place")+'</li>';
-    
-    leader_board.innerHTML+='<li>'+localStorage.getItem("sixth_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("seventh_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("eighth_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("ninth_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("tenth_place")+'</li>';
-    
-    leader_board.innerHTML+='<li>'+localStorage.getItem("eleventh_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("twelth_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("thirteenth_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("fourteenth_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("fifteenth_place")+'</li>';
-    
-    leader_board.innerHTML+='<li>'+localStorage.getItem("sixteenth_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("seventeenth_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("eighteenth_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("ninteenth_place")+'</li>';
-    leader_board.innerHTML+='<li>'+localStorage.getItem("twentyith_place")+'</li>';
-    
-    
+
+    const scores = JSON.parse(localStorage.getItem("leaderboard_scores"));
+    for (let i in scores){
+        leader_board.innerHTML+= '<li>'+scores[i].email+" - "+scores[i].high+'</li>';
+    }
 }
 
 function loadGame(){
@@ -183,7 +90,7 @@ function loadGame(){
     document.getElementById("highscore").innerHTML=localStorage.getItem("snake_game_high_score");
     add_start_snake();
     add_food();
-    load_highscores();
+    load_messages();
     loop();
 }
 
@@ -409,7 +316,7 @@ function loop(){
     
 }
 
-function load_highscores(){
+function load_messages(){
     
     var xhttp2 = new XMLHttpRequest();
     xhttp2.onreadystatechange = function() {
@@ -435,4 +342,6 @@ function close_snake_skins(){
     setTimeout(loop , speed);
 }
 
-setInterval(function(){ load_highscores();  }, 5000);
+setInterval(function(){ load_messages();  }, 5000);
+
+window.addEventListener("load",()=>loadGame())

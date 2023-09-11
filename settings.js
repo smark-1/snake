@@ -1,21 +1,22 @@
 //make a sheetdb.io account
 //click create new
 //copy api key 
-//paste it below inside of the SHEETDB_API_KEY 
-const SHEETDB_API_KEY="xxxxxxxx";
+//paste it below inside of the SHEETDB_API_KEY
+// this is not secure any one can use this api key and add any value to the sheet with this api key
+const SHEETDB_API_KEY="n4nkpul3wanp1";
 
-//in the top row of your new spread sheet api put in cell A1 "name" and in cell B1 "score"
+//in the top row of your new spreadsheet api put in cell A1 "name" and in cell B1 "score"
 
 //create a new sheet 
-//put the name of the Sheet below i.e 
+//put the name of the Sheet below i.e.
 //const SHEETDB_LEADERBOARD_SHEET="Sheet2";
 
 const SHEETDB_LEADERBOARD_SHEET="Sheet2";
 
-//in the top row of your second spread sheet put in cell A1 "email" and in cell B1 "high"
+//in the top row of your second spreadsheet put in cell A1 "email" and in cell B1 "high"
 //high is for the high score of that particular user
 //email is for the name of that user
-//write some function or make a pivit table to get the high scores of between the top 5 till top 30 high scores
+//write some function or make a pivot table to get the high scores of between the top 5 till top 30 high scores
 //then take that data and put it into the Leader board sheet show that it can auto update
 
 
