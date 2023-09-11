@@ -1,13 +1,9 @@
 body{
-    margin-right:auto;
-    margin-left:auto;
-    margin-top:0px;
-    margin-bottom:0px;
+    margin: 0 auto;
     width:510px;
     background-color:black;
     color:white;
-    
-    
+    padding: 20px;
 }
 
 ::-webkit-scrollbar {
@@ -15,8 +11,8 @@ body{
 }
 
 h1, h2, h3, h4, h5, h6{
-    font-family: 'Press Start 2P';
-    padding:0.1em;
+    font-family: 'Press Start 2P', serif;
+    padding:0.3em;
 }
 
 .panel{
@@ -36,7 +32,6 @@ h1, h2, h3, h4, h5, h6{
     margin-bottom:25px;
     box-sizing:border-box;
     background-color:#21201f;
-    /*background-color:#191919;*/
 }
 
 .popup{
@@ -44,7 +39,7 @@ h1, h2, h3, h4, h5, h6{
     position:fixed;
     width: 510px;
     padding:20px;
-    height:400px;
+    height:450px;
     text-align: center;
     border-radius:10px;
     z-index:5;
@@ -55,15 +50,19 @@ h1, h2, h3, h4, h5, h6{
     transition: all 300ms ease-in-out;
     pointer-events: none;
 }
+#skins{
+    height:600px;
+}
 
 .popup.active{
     opacity:1;
     pointer-events: auto;
-    top: 50;
+    top: 20%;
 }
+
 #leaderboard{
-    top: 110;
-    left: 30;
+    top: 110px;
+    left: 30px;
     width:300px;
     padding:20px;
     background-color:#21201f;
@@ -71,8 +70,8 @@ h1, h2, h3, h4, h5, h6{
 }
 
 #messages{
-    top: 370;
-    left: 30;
+    top: 370px;
+    left: 30px;
     width:300px;
     padding:20px;
     background-color:#21201f;
@@ -80,8 +79,8 @@ h1, h2, h3, h4, h5, h6{
 }
 
 #advert{
-    top: 110;
-    right: 30;
+    top: 110px;
+    right: 30px;
 }
 
 li{
@@ -100,8 +99,9 @@ h1,h2 {
 }
 
 .game-row , .skins-row{
-    margin-top:0px;
-    margin-bottom:0px;
+    margin-top:0;
+    margin-bottom:0;
+    height: 17px;
 }
 
 .skins-row > .snake:nth-child(2) {
@@ -131,19 +131,16 @@ h1,h2 {
 }
 
 .box{
-    
     background-color:black;
     width:17px;
     height:17px;
-    margin-left:0px;
-    margin-right:0px;
+    margin-left:0;
+    margin-right:0;
     border-color:green;
     border-width:5px;
     border-style: none;
     box-sizing:border-box;
     display:inline-block;
-    
-    
 }
 
 .button{
@@ -157,19 +154,17 @@ h1,h2 {
 .button:hover{
     background-color:#383838;
     border-radius:15px;
-    
 }
 
 .box:first-child, .box:last-child, .game-row.border > .box{
     background-color:#383838;
     border-style: none;
-
 }
 
 .box.food{
-    width:0px;
-    height:0px;
-    margin:8.5;
+    width:0;
+    height:0;
+    margin:9px;
     background-color:blue;
     border-radius:50%;
     animation-name: food_color, colors;
@@ -177,13 +172,12 @@ h1,h2 {
     animation-direction: alternate;
     animation-iteration-count: infinite;
     transition: all 20ms linear;
-    animation-delay: 50ms;
 }
 
 
 
 @keyframes food_color {
-  0%   {width:13px;height:13px;margin:2;}
+  0%   {width:13px;height:13px;margin:2px;}
   100% {width:17px;height:17px;margin:0;}
 }
 
@@ -198,10 +192,9 @@ h1,h2 {
 .box.snake{
     border-color:pink;
     background-color:red;
-    border-radius:0px;
+    border-radius:0;
     border-width:5px;
     border-style:none;
-    /*background-image: url("https://docs.google.com/drawings/d/e/2PACX-1vR6hbUxXIR0QUQfBSWaPRC6PbqqynxlrAzuZ_TCkD-fAVN4wiXZHACDT2Lqvv4UsAqIjjCiuORrLyxt/pub?w=480&h=480");*/
     background-size: cover;
     
     animation-duration: 1000ms;

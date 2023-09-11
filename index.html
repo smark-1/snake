@@ -1,196 +1,200 @@
-<body>
-    <link href='https://fonts.googleapis.com/css?family=Press Start 2P' rel='stylesheet'>
-    <link rel="stylesheet" href="game.css">
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.min.js"
-      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
-      crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/settings.js"></script>
-    <script src="game.js"></script>
-    <title>Snake</title>
-    <h1>Snake</h1>
-    <div class="flex-container">
-        <p>score: <span id="score"></span></p>
-        <p>last games score: <span id="lastscore">--</span></p>
-        <p><b>high score</b>: <span id="highscore">0</span></p>
-        <p class="button" onclick="open_snake_skins()">skins</p>
-    </div>
-    
-    
-    <div id="leaderboard" class="panel">
-    <h3>Leaderboard</h3>
-    <ol id="leader_board_text">
-    </ol>
-    </div>
-    <div id="messages" class="panel">
-    </div>
-    <div class="popup" id="lost">
-        <h3>you lost</h3>
-        <h1>your score: <span id="lost_score"></span></h1>
-        <br>
-        <p class="button" style="margin-left:150px;margin-right:150px;" onclick="open_snake_skins()">change you skin</p>
-        <br/><br/>
-        <p class="button" onclick="restart()">restart</p>
-        <h6>press enter to restart</h6>
-    </div>
-    
-    
-    <div class="popup" id="skins">
-        <h2>choose your skin</h2>
-        <div class="skins-row" onclick="change_skin('')">
-            <div class="box snake"></div>
-            <div class="box snake"></div>
-            <div class="box snake"></div>
-            <div class="box snake"></div>
-            <div class="box snake"></div>
-            <div class="box snake"></div>
-            <div class="box snake"></div>
-            <div class="box snake"></div>
-            <div class="box snake"></div>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href='https://fonts.googleapis.com/css?family=Press Start 2P' rel='stylesheet'>
+        <link rel="stylesheet" href="game.css">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="./settings.js"></script>
+        <script src="./game.js"></script>
+        <title>Snake</title>
+    </head>
+    <body>
+        <h1>Snake</h1>
+        <div class="flex-container">
+            <p>score: <span id="score"></span></p>
+            <p>last games score: <span id="lastscore">--</span></p>
+            <p><b>high score</b>: <span id="highscore">0</span></p>
+            <p class="button" onclick="open_snake_skins()">skins</p>
         </div>
-        <br/>
-            <div class="skins-row" onclick="change_skin('skin8')">
-            <div class="box snake skin8"></div>
-            <div class="box snake skin8"></div>
-            <div class="box snake skin8"></div>
-            <div class="box snake skin8"></div>
-            <div class="box snake skin8"></div>
-            <div class="box snake skin8"></div>
-            <div class="box snake skin8"></div>
-            <div class="box snake skin8"></div>
-            <div class="box snake skin8"></div>
+
+
+        <div id="leaderboard" class="panel">
+            <h3>Leaderboard</h3>
+            <ol id="leader_board_text">
+            </ol>
         </div>
-                <br/>
-        <div class="skins-row" onclick="change_skin('skin9')">
-            <div class="box snake skin9"></div>
-            <div class="box snake skin9"></div>
-            <div class="box snake skin9"></div>
-            <div class="box snake skin9"></div>
-            <div class="box snake skin9"></div>
-            <div class="box snake skin9"></div>
-            <div class="box snake skin9"></div>
-            <div class="box snake skin9"></div>
-            <div class="box snake skin9"></div>
+        <div id="messages" class="panel"></div>
+        <div class="popup" id="lost">
+            <h3>you lost</h3>
+            <h1>your score: <span id="lost_score"></span></h1>
+            <br>
+            <p class="button" style="margin-left:150px;margin-right:150px;" onclick="open_snake_skins()">change you skin</p>
+            <br/><br/>
+            <p class="button" onclick="restart()">restart</p>
+            <h6>press enter to restart</h6>
         </div>
-                <br/>
-        <div class="skins-row" onclick="change_skin('skin10')">
-            <div class="box snake skin10"></div>
-            <div class="box snake skin10"></div>
-            <div class="box snake skin10"></div>
-            <div class="box snake skin10"></div>
-            <div class="box snake skin10"></div>
-            <div class="box snake skin10"></div>
-            <div class="box snake skin10"></div>
-            <div class="box snake skin10"></div>
-            <div class="box snake skin10"></div>
-        </div>
-        <br>
-        <div class="skins-row" onclick="change_skin('skin1')">
-            <div class="box snake skin1"></div>
-            <div class="box snake skin1"></div>
-            <div class="box snake skin1"></div>
-            <div class="box snake skin1"></div>
-            <div class="box snake skin1"></div>
-            <div class="box snake skin1"></div>
-            <div class="box snake skin1"></div>
-            <div class="box snake skin1"></div>
-            <div class="box snake skin1"></div>
-        </div>
-        <br/>
-        <div class="skins-row" onclick="change_skin('skin2')">
-            <div class="box snake skin2"></div>
-            <div class="box snake skin2"></div>
-            <div class="box snake skin2"></div>
-            <div class="box snake skin2"></div>
-            <div class="box snake skin2"></div>
-            <div class="box snake skin2"></div>
-            <div class="box snake skin2"></div>
-            <div class="box snake skin2"></div>
-            <div class="box snake skin2"></div>
-        </div>
-        <br/>
-        <div class="skins-row" onclick="change_skin('skin3')">
-            <div class="box snake skin3"></div>
-            <div class="box snake skin3"></div>
-            <div class="box snake skin3"></div>
-            <div class="box snake skin3"></div>
-            <div class="box snake skin3"></div>
-            <div class="box snake skin3"></div>
-            <div class="box snake skin3"></div>
-            <div class="box snake skin3"></div>
-            <div class="box snake skin3"></div>
-        </div>
-        
-        <br/>    
-        <div class="skins-row" onclick="change_skin('skin4')">
-            <div class="box snake skin4"></div>
-            <div class="box snake skin4"></div>
-            <div class="box snake skin4"></div>
-            <div class="box snake skin4"></div>
-            <div class="box snake skin4"></div>
-            <div class="box snake skin4"></div>
-            <div class="box snake skin4"></div>
-            <div class="box snake skin4"></div>
-            <div class="box snake skin4"></div>
-        </div>
-        <br/>    
-        <div class="skins-row" onclick="change_skin('skin5')">
-            <div class="box snake skin5"></div>
-            <div class="box snake skin5"></div>
-            <div class="box snake skin5"></div>
-            <div class="box snake skin5"></div>
-            <div class="box snake skin5"></div>
-            <div class="box snake skin5"></div>
-            <div class="box snake skin5"></div>
-            <div class="box snake skin5"></div>
-            <div class="box snake skin5"></div>
-        </div>
-        <br/>
-        <div class="skins-row" onclick="change_skin('skin6')">
-            <div class="box snake skin6"></div>
-            <div class="box snake skin6"></div>
-            <div class="box snake skin6"></div>
-            <div class="box snake skin6"></div>
-            <div class="box snake skin6"></div>
-            <div class="box snake skin6"></div>
-            <div class="box snake skin6"></div>
-            <div class="box snake skin6"></div>
-            <div class="box snake skin6"></div>
-        </div>
+
+
+        <div class="popup" id="skins">
+            <h2>choose your skin</h2>
+            <div class="skins-row" onclick="change_skin('')">
+                <div class="box snake"></div>
+                <div class="box snake"></div>
+                <div class="box snake"></div>
+                <div class="box snake"></div>
+                <div class="box snake"></div>
+                <div class="box snake"></div>
+                <div class="box snake"></div>
+                <div class="box snake"></div>
+                <div class="box snake"></div>
+            </div>
             <br/>
-        <div class="skins-row" onclick="change_skin('skin7')">
-            <div class="box snake skin7"></div>
-            <div class="box snake skin7"></div>
-            <div class="box snake skin7"></div>
-            <div class="box snake skin7"></div>
-            <div class="box snake skin7"></div>
-            <div class="box snake skin7"></div>
-            <div class="box snake skin7"></div>
-            <div class="box snake skin7"></div>
-            <div class="box snake skin7"></div>
+            <div class="skins-row" onclick="change_skin('skin8')">
+                <div class="box snake skin8"></div>
+                <div class="box snake skin8"></div>
+                <div class="box snake skin8"></div>
+                <div class="box snake skin8"></div>
+                <div class="box snake skin8"></div>
+                <div class="box snake skin8"></div>
+                <div class="box snake skin8"></div>
+                <div class="box snake skin8"></div>
+                <div class="box snake skin8"></div>
+            </div>
+            <br/>
+            <div class="skins-row" onclick="change_skin('skin9')">
+                <div class="box snake skin9"></div>
+                <div class="box snake skin9"></div>
+                <div class="box snake skin9"></div>
+                <div class="box snake skin9"></div>
+                <div class="box snake skin9"></div>
+                <div class="box snake skin9"></div>
+                <div class="box snake skin9"></div>
+                <div class="box snake skin9"></div>
+                <div class="box snake skin9"></div>
+            </div>
+            <br/>
+            <div class="skins-row" onclick="change_skin('skin10')">
+                <div class="box snake skin10"></div>
+                <div class="box snake skin10"></div>
+                <div class="box snake skin10"></div>
+                <div class="box snake skin10"></div>
+                <div class="box snake skin10"></div>
+                <div class="box snake skin10"></div>
+                <div class="box snake skin10"></div>
+                <div class="box snake skin10"></div>
+                <div class="box snake skin10"></div>
+            </div>
+            <br>
+            <div class="skins-row" onclick="change_skin('skin1')">
+                <div class="box snake skin1"></div>
+                <div class="box snake skin1"></div>
+                <div class="box snake skin1"></div>
+                <div class="box snake skin1"></div>
+                <div class="box snake skin1"></div>
+                <div class="box snake skin1"></div>
+                <div class="box snake skin1"></div>
+                <div class="box snake skin1"></div>
+                <div class="box snake skin1"></div>
+            </div>
+            <br/>
+            <div class="skins-row" onclick="change_skin('skin2')">
+                <div class="box snake skin2"></div>
+                <div class="box snake skin2"></div>
+                <div class="box snake skin2"></div>
+                <div class="box snake skin2"></div>
+                <div class="box snake skin2"></div>
+                <div class="box snake skin2"></div>
+                <div class="box snake skin2"></div>
+                <div class="box snake skin2"></div>
+                <div class="box snake skin2"></div>
+            </div>
+            <br/>
+            <div class="skins-row" onclick="change_skin('skin3')">
+                <div class="box snake skin3"></div>
+                <div class="box snake skin3"></div>
+                <div class="box snake skin3"></div>
+                <div class="box snake skin3"></div>
+                <div class="box snake skin3"></div>
+                <div class="box snake skin3"></div>
+                <div class="box snake skin3"></div>
+                <div class="box snake skin3"></div>
+                <div class="box snake skin3"></div>
+            </div>
+
+            <br/>
+            <div class="skins-row" onclick="change_skin('skin4')">
+                <div class="box snake skin4"></div>
+                <div class="box snake skin4"></div>
+                <div class="box snake skin4"></div>
+                <div class="box snake skin4"></div>
+                <div class="box snake skin4"></div>
+                <div class="box snake skin4"></div>
+                <div class="box snake skin4"></div>
+                <div class="box snake skin4"></div>
+                <div class="box snake skin4"></div>
+            </div>
+            <br/>
+            <div class="skins-row" onclick="change_skin('skin5')">
+                <div class="box snake skin5"></div>
+                <div class="box snake skin5"></div>
+                <div class="box snake skin5"></div>
+                <div class="box snake skin5"></div>
+                <div class="box snake skin5"></div>
+                <div class="box snake skin5"></div>
+                <div class="box snake skin5"></div>
+                <div class="box snake skin5"></div>
+                <div class="box snake skin5"></div>
+            </div>
+            <br/>
+            <div class="skins-row" onclick="change_skin('skin6')">
+                <div class="box snake skin6"></div>
+                <div class="box snake skin6"></div>
+                <div class="box snake skin6"></div>
+                <div class="box snake skin6"></div>
+                <div class="box snake skin6"></div>
+                <div class="box snake skin6"></div>
+                <div class="box snake skin6"></div>
+                <div class="box snake skin6"></div>
+                <div class="box snake skin6"></div>
+            </div>
+            <br/>
+            <div class="skins-row" onclick="change_skin('skin7')">
+                <div class="box snake skin7"></div>
+                <div class="box snake skin7"></div>
+                <div class="box snake skin7"></div>
+                <div class="box snake skin7"></div>
+                <div class="box snake skin7"></div>
+                <div class="box snake skin7"></div>
+                <div class="box snake skin7"></div>
+                <div class="box snake skin7"></div>
+                <div class="box snake skin7"></div>
+            </div>
+            <br/>
+
+            <p class="button" onclick="close_snake_skins()">close</p>
         </div>
-                <br/>
-    
-        <p class="button" onclick="close_snake_skins()">close</p>
-    </div>
-    
-    <div id="advert" class="panel">
-        <div style="height:300px">
-            ads go here
+
+        <div id="advert" class="panel">
+            <div style="height:300px">
+                ads go here
+            </div>
+            <div style="height:300px">
+                ads go here
+            </div>
+            <div style="height:300px">
+                ads go here
+            </div>
+            <div style="height:300px">
+                ads go here
+            </div>
+
+
+            <p style="font-size: 10px;">have an ad?<p>
         </div>
-        <div style="height:300px">
-            ads go here
-        </div>
-        <div style="height:300px">
-            ads go here
-        </div>
-        <div style="height:300px">
-            ads go here
-        </div>
-        
-        
-        <p style="font-size: 10px;">have an ad?<p>
-    </div>
-    <p style="position: fixed;bottom: 0;text-align: center;width: 100%;left: 0;">refresh to update scores at <span id="refresh_time"></span></p> 
+        <p style="position: fixed;bottom: 0;text-align: center;width: 100%;left: 0;">refresh to update scores at <span id="refresh_time"></span></p>
     </body>
+</html>

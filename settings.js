@@ -13,7 +13,7 @@ const SHEETDB_API_KEY="n4nkpul3wanp1";
 
 const SHEETDB_LEADERBOARD_SHEET="Sheet2";
 
-//in the top row of your second spreadsheet put in cell A1 "email" and in cell B1 "high"
+//in the top row of your second spreadsheet put in cell A1 "name" and in cell B1 "high"
 //high is for the high score of that particular user
 //email is for the name of that user
 //write some function or make a pivot table to get the high scores of between the top 5 till top 30 high scores
