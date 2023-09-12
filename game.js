@@ -22,7 +22,7 @@ function getLeaderBoardScoresFromDB(){
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            localStorage.setItem("leaderboard_scores",this.responseText)
+            localStorage.setItem("leaderboard_scores",this.responseText.toString())
             displayLeaderBoard();
         }
     };
@@ -54,6 +54,7 @@ function displayLeaderBoard(){
     const leader_board = document.getElementById("leader_board_text");
 
     const scores = JSON.parse(localStorage.getItem("leaderboard_scores"));
+    leader_board.innerHTML="";
     for (let i in scores){
         leader_board.innerHTML+= '<li>'+scores[i].name+" - "+scores[i].high+'</li>';
     }
@@ -216,7 +217,7 @@ function lose(){
         localStorage.setItem("snake_game_high_score", snake.length);
         document.getElementById("highscore").innerHTML=snake.length;
         
-        //save to spreadsheet
+        //save to spreadsheet and add to local leaderboard if the user has a username
         if(localStorage.getItem("user_name")!=null){
             axios.post(`https://sheetdb.io/api/v1/${SHEETDB_API_KEY}`,{
                 "data": {
@@ -224,11 +225,27 @@ function lose(){
                     "score": snake.length
                     }
             });
-        }
-        
 
-        
-        
+            let scores = JSON.parse(localStorage.getItem("leaderboard_scores"));
+            for(let i=0; i< scores.length;i++){
+                if(scores[i].name===""+localStorage.getItem("user_name")){
+                    if(parseInt(scores[i].high)<snake.length){
+                        scores[i].high=snake.length;
+                    }
+                    break;
+                }else if(parseInt(scores[i].high)<snake.length){
+                    let new_leader_board = {name:localStorage.getItem("user_name"),high:""+snake.length}
+                    scores.push(new_leader_board);
+                    break;
+                }else{
+
+                }
+            }
+
+            scores = scores.sort((score1,score2)=>parseInt(score2.high)-parseInt(score1.high));
+            localStorage.setItem("leaderboard_scores",JSON.stringify(scores));
+            displayLeaderBoard();
+        }
     }
     document.getElementById("lastscore").innerHTML=snake.length;
     clear_board()
