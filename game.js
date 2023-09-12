@@ -218,7 +218,7 @@ function lose(){
         document.getElementById("highscore").innerHTML=snake.length;
         
         //save to spreadsheet and add to local leaderboard if the user has a username
-        if(localStorage.getItem("user_name")!=null){
+        if(localStorage.getItem("user_name")!=null && localStorage.getItem("user_name")!==""){
             axios.post(`https://sheetdb.io/api/v1/${SHEETDB_API_KEY}`,{
                 "data": {
                     "name": localStorage.getItem("user_name"),
