@@ -104,16 +104,30 @@ function loadGame(){
 function keypress(e){
     let key = e.keyCode;
     if (key===38 && game_direction!=="down"){
-        snake_direction="up";
+        snake_direction = "up";
+        if(game_over){
+            restart();
+        }
     }
     if (key===39 && game_direction!=="left"){
-        snake_direction="right";
+        snake_direction = "right";
+        if(game_over){
+            restart();
+        }
     }
     if (key===37 && game_direction!=="right"){
-        snake_direction="left";
+        snake_direction = "left";
+        if(game_over){
+            restart();
+        }
+
     }
     if (key===40 && game_direction!=="up"){
-        snake_direction="down";
+        snake_direction = "down";
+        if(game_over){
+            restart();
+        }
+
     }
     // pause
     // p
