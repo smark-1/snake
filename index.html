@@ -8,17 +8,18 @@
         <link href='https://fonts.googleapis.com/css?family=Press Start 2P' rel='stylesheet'>
         <link rel="stylesheet" href="game.css">
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="./swiped-events.min.js" ></script>
         <script src="./settings.js"></script>
         <script src="./game.js"></script>
         <title>Snake</title>
     </head>
-    <body>
+    <body data-swipe-threshold="2" style="max-width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center;">
         <h1>Snake</h1>
-        <div class="flex-container">
-            <p>score: <span id="score"></span></p>
-            <p>last games score: <span id="lastscore">--</span></p>
-            <p><b>high score</b>: <span id="highscore">0</span></p>
-            <p class="button" onclick="open_snake_skins()">skins</p>
+        <div id="top_bar" class="flex-container">
+            <p>score: <span id="score"></span> </p>&nbsp;&nbsp;
+            <p>last games score: <span id="lastscore">--</span></p>&nbsp;&nbsp;
+            <p><b>high score</b>: <span id="highscore">0</span> </p>&nbsp;&nbsp;
+            <button style="animation-delay: -6s;" onclick="open_snake_skins()">skins</button>
         </div>
 
 
@@ -32,10 +33,8 @@
             <h3>you lost</h3>
             <h1>your score: <span id="lost_score"></span></h1>
             <br>
-            <p class="button" style="margin-left:150px;margin-right:150px;" onclick="open_snake_skins()">change you skin</p>
-            <br/><br/>
-            <p class="button" onclick="restart()">restart</p>
-            <h6>press enter to restart</h6>
+            <button onclick="open_snake_skins()">change you skin</>
+            <button onclick="restart()">press enter to restart</>
         </div>
 
 
@@ -175,7 +174,7 @@
             </div>
             <br/>
 
-            <p class="button" onclick="close_snake_skins()">close</p>
+            <button onclick="close_snake_skins()">close</>
         </div>
 
         <div id="advert" class="panel">
@@ -195,6 +194,13 @@
 
             <p style="font-size: 10px;">have an ad?<p>
         </div>
-        <p style="position: fixed;bottom: 0;text-align: center;width: 100%;left: 0;">refresh to update scores at <span id="refresh_time"></span></p>
+
+        <div id="game-board" >
+                
+        </div>
+        <p id="refresh_score_p" style="position: fixed;bottom: 0;text-align: center;width: 100%;left: 0;">refresh to update scores at <span id="refresh_time"></span></p>
+        <div id="mobile_buttons" class="flex-container">
+            <button style="animation-delay: -6s;" onclick="open_snake_skins()">Skins/Pause</button>
+        </div>
     </body>
 </html>

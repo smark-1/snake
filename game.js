@@ -2,7 +2,7 @@ let snake = [];
 const game_rows = 30;
 const game_columns = 30;
 let snake_direction = "up";
-let snake_skin = "";
+let snake_skin = localStorage.getItem("snake_skin") || "skin6";
 let game_direction = snake_direction;
 
 let food = [];
@@ -10,11 +10,12 @@ const start_speed = 100;
 let speed = start_speed;
 let paused = false;
 let game_over = false;
-
+const mobile_width = 480;
 
 function change_skin(skin){
     snake_skin=skin;
     close_snake_skins();
+    localStorage.setItem("snake_skin",skin);
 }
 
 function getLeaderBoardScoresFromDB(){
@@ -61,14 +62,15 @@ function displayLeaderBoard(){
 }
 
 function loadGame(){
-    
-    displayLeaderBoard();
-    
+    if (window.innerWidth > mobile_width){
+        displayLeaderBoard();
+    }
+    const game_board = document.getElementById("game-board");    
     
     for (let i = 0; i < game_rows; i++){
         const row = document.createElement("div");
 
-        document.body.appendChild(row);
+        game_board.appendChild(row);
         row.classList.add("game-row");
         if (i===0 || i===game_rows-1){
             row.classList.add("border");
@@ -79,10 +81,14 @@ function loadGame(){
             row.appendChild(box)
         }
     }
-    if (localStorage.getItem("user_name")==null){
-        const name = prompt("What is your name?");
-        if(name!=null){
-            localStorage.setItem("user_name",name);
+    if (window.innerWidth > mobile_width) {
+        if (localStorage.getItem("user_name") == null) {
+            const name = prompt("Leaderboard name? (cancel to skip)");
+            if (name != null) {
+                localStorage.setItem("user_name", name);
+            } else {
+                localStorage.setItem("user_name", "");
+            }
         }
     }
     
@@ -353,15 +359,48 @@ function load_messages(){
 
 function open_snake_skins(){
     document.getElementById("skins").classList.add("active");
-    paused=true;
+    paused = true;
+    const paused_div=document.getElementById("lost")
+    paused_div.classList.remove("active");
 }
 
 function close_snake_skins(){
     document.getElementById("skins").classList.remove("active");
     paused=false;
-    setTimeout(loop , speed);
+    if (game_over) { 
+        restart();
+    } else {
+        setTimeout(loop, speed);
+    }
 }
 
 setInterval(function(){ load_messages();  }, 5000);
 document.addEventListener("keydown", keypress);
-window.addEventListener("load",()=>loadGame())
+window.addEventListener("load", () => loadGame())
+
+// https://github.com/john-doherty/swiped-events/tree/master?tab=readme-ov-file
+// mobile swipe events
+document.addEventListener('swiped-left', function (e) {
+    if (game_direction!=="right"){
+        snake_direction="left";
+    }
+});
+
+document.addEventListener('swiped-right', function (e) {
+    if (game_direction!=="left"){
+        snake_direction="right";
+    }
+});
+
+document.addEventListener('swiped-up', function (e) {
+    if (game_direction!=="down"){
+        snake_direction="up";
+    }
+});
+
+document.addEventListener('swiped-down', function (e) {
+    if (game_direction !== "up") {
+        snake_direction="down";
+    }
+});
+

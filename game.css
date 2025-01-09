@@ -4,6 +4,7 @@ body{
     background-color:black;
     color:white;
     padding: 20px;
+    font-family: 'times', serif;
 }
 
 ::-webkit-scrollbar {
@@ -13,6 +14,7 @@ body{
 h1, h2, h3, h4, h5, h6{
     font-family: 'Press Start 2P', serif;
     padding:0.3em;
+    max-width: 100vw;
 }
 
 .panel{
@@ -35,11 +37,13 @@ h1, h2, h3, h4, h5, h6{
 }
 
 .popup{
-    background-color:#21201f;
+    background-color:transparent;
     position:fixed;
     width: 510px;
+    max-width: 90vw;
+    max-height: 90vh;
     padding:20px;
-    height:450px;
+    height:650px;
     text-align: center;
     border-radius:10px;
     z-index:5;
@@ -81,6 +85,10 @@ h1, h2, h3, h4, h5, h6{
 #advert{
     top: 110px;
     right: 30px;
+}
+
+#mobile_buttons{
+    display: none;
 }
 
 li{
@@ -143,15 +151,32 @@ h1,h2 {
     display:inline-block;
 }
 
-.button{
+button{
     background-color:#21201f;
-    padding:3px 15px;
-    border-radius:5px;
+    padding:15px;
+    border-radius:3px;
     transition: all 200ms ease-in-out;
     cursor: pointer;
+    width: "full";
+    display:inline-block;
+    color:white;
+    margin: 20px;
+    text-align:center;
+    vertical-align: middle;
+    line-height: 1;
+    font-family: 'Press Start 2P', serif;
+    animation-name: button_colors;
+    animation-duration: 7s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+
 }
 
-.button:hover{
+* > button:nth-child(2n) { animation-delay: -3s }  
+* > button:nth-child(3n) { animation-delay: -15s }   
+
+
+button:hover{
     background-color:#383838;
     border-radius:15px;
 }
@@ -162,23 +187,21 @@ h1,h2 {
 }
 
 .box.food{
-    width:0;
-    height:0;
-    margin:9px;
+    width:17;
+    height:17;
+    /* margin:9px; */
     background-color:blue;
     border-radius:50%;
-    animation-name: food_color, colors;
-    animation-duration: 200ms, 5000ms;
-    animation-direction: alternate;
-    animation-iteration-count: infinite;
+    animation: grow 2s infinite alternate, colors 5s infinite alternate;
     transition: all 20ms linear;
 }
 
 
 
-@keyframes food_color {
-  0%   {width:13px;height:13px;margin:2px;}
-  100% {width:17px;height:17px;margin:0;}
+@keyframes grow {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.7); }
+    100% { transform: scale(1); }
 }
 
 @keyframes colors {
@@ -187,6 +210,14 @@ h1,h2 {
   50%   {background-color:pink;}
   75%   {background-color:brown;}
   100% {background-color: green;}
+}
+
+@keyframes button_colors {
+  0%   {color: white;border-color: white;}
+  25%   {color:blue;border-color:blue;}
+  50%   {color:pink;border-color:pink;}
+  75%   {color:brown;border-color:brown;}
+  100% {color: green;border-color:green;}
 }
 
 .box.snake{
@@ -306,4 +337,105 @@ h1,h2 {
 @keyframes snake_skin10{
     0%    {background-color:white;border-style:none;}
     100%   {background-color: white;}
+}
+
+/* mobile */
+@media (max-width:480px)  {
+    #messages{
+        display:none
+    }
+    #advert{
+        display:none
+    }
+    #leaderboard{
+        display:none
+    }
+    .popup.active{
+        top: 5%;
+    }
+    .box{
+        width:3vw;
+        height:3vw;
+        margin-left:0;
+        margin-right:0;
+    }
+    .game-row{
+        height: 3vw;
+        width: auto;
+        /* display: inline-block; */
+    }
+    .box.food{
+        width:3vw;
+        height:3vw;
+        margin:0vw;
+        transition: none;
+    }
+    #refresh_score_p{
+        display:none;
+    }
+
+
+    #top_bar{
+        display:none;
+    }
+    body{
+        padding: 0;
+        position: relative;
+        /* padding: 20px; */
+    }
+    .popup{
+        margin: 20px;
+        /* display: none; */
+    }
+
+    #game-board{
+        margin: 0 auto;
+        padding: 0;
+    }
+    html, body {
+        overflow-x: hidden;
+    }
+    body {
+        height: 100%;
+        overflow: hidden;
+        width: 100%;
+        position: fixed;
+    }
+    #mobile_buttons{
+        display: block;
+    }
+
+}
+
+/* prevent overscroll */
+
+/* prevent pull-to-refresh for Safari 16+ */
+@media screen and (pointer: coarse) {
+  @supports (-webkit-backdrop-filter: blur(1px)) and (overscroll-behavior-y: none)  {
+    html {
+      min-height: 100.3%;
+      overscroll-behavior-y: none;
+    }
+  }
+}
+/* prevent pull-to-refresh for Safari 9~15 */
+@media screen and (pointer: coarse) {
+  @supports (-webkit-backdrop-filter: blur(1px)) and (not (overscroll-behavior-y: none))  {
+    html {
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      margin: 0px;
+      max-height: 100%; /* or `height: calc(100% - 16px);` if body has default margin */
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    /* in this case to disable pinch-zoom, set `touch-action: pan-x pan-y;` on `body` instead of `html` */
+  }
+}
+
+/* prevent pull-to-refresh for Chrome 63+ */
+body{
+  overscroll-behavior-y: none;
 }
